@@ -62,13 +62,14 @@ public class Main {
         return 0;
     }
 
-    static private void removeCard(Map<String, String> cards, Scanner sc, Logging log) {
+    static private void removeCard(Map<String, String> cards, Scanner sc, Logging log, Mistakes count) {
         System.out.println("Card:");
         log.saveData("Card:");
         String key = sc.nextLine();
         log.saveData(key);
         if(cards.containsKey(key)) {
             cards.remove(key);
+            count.deleteCard(key);
             System.out.println("The card has been removed.");
             log.saveData("The card has been removed.");
         } else {
@@ -203,7 +204,7 @@ public class Main {
             if ("add".equals(com)) {
                 addCards(cards, sc, log);
             } else if("remove".equals(com)) {
-                removeCard(cards, sc, log);
+                removeCard(cards, sc, log, counter);
             } else if("import".equals(com)) {
                 try {
                     importCards(cards, sc, log, counter);

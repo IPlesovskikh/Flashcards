@@ -56,7 +56,11 @@ public class Mistakes {
                 mistakes.replace(card, count);
             }
         } else {
-            addCount(card);
+            mistakes.put(card, count);
         }
+    }
+
+    public void deleteCard(String card) {
+        mistakes.remove(card);
     }
 }

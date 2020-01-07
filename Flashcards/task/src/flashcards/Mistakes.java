@@ -59,8 +59,7 @@ public class Mistakes {
             mistakes.put(card, count);
         }
     }
-
-    public void deleteCard(String card) {
+    public void deleteCard(String card){
         mistakes.remove(card);
     }
 }

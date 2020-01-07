@@ -114,11 +114,13 @@ public class Main {
         }
     }
 
-    private static void exportCards(Map<String, String> cards,  Scanner sc, Logging log, Mistakes counter) throws IOException {
-        System.out.println("File name:");
-        log.saveData("File name:");
-        String path = sc.nextLine();
-        log.saveData(path);
+    private static void exportCards(Map<String, String> cards,  Scanner sc, Logging log, Mistakes counter, String path) throws IOException {
+        if(path == null) {
+            System.out.println("File name:");
+            log.saveData("File name:");
+            path = sc.nextLine();
+            log.saveData(path);
+        }
         File file = new File(path);
         FileWriter writer = new FileWriter(file);
         for (var entry : cards.entrySet()) {
@@ -131,11 +133,13 @@ public class Main {
         log.saveData(cards.size() + " cards have been saved.");
     }
 
-    private static void importCards(Map<String, String> cards, Scanner sc, Logging log, Mistakes counter) throws IOException {
-        System.out.println("File name:");
-        log.saveData("File name:");
-        String path = sc.nextLine();
-        log.saveData(path);
+    private static void importCards(Map<String, String> cards, Scanner sc, Logging log, Mistakes counter, String path) throws IOException {
+        if(path == null) {
+            System.out.println("File name:");
+            log.saveData("File name:");
+            path = sc.nextLine();
+            log.saveData(path);
+        }
         List<String> list = Files.readAllLines(Paths.get(path));
         String tempKey = null;
         String tempValue = null;
@@ -196,6 +200,13 @@ public class Main {
         Mistakes counter = new Mistakes();
         Logging log = new Logging();
         String com = null;
+        if("-import".equals(args[0])) {
+            try {
+                importCards(cards, sc, log, counter, args[1]);
+            } catch(IOException e) {
+                System.out.println("not found");
+            }
+        }
         while (true) {
             System.out.println("Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):");
             log.saveData("Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):");
@@ -207,19 +218,26 @@ public class Main {
                 removeCard(cards, sc, log, counter);
             } else if("import".equals(com)) {
                 try {
-                    importCards(cards, sc, log, counter);
+                    importCards(cards, sc, log, counter, null);
                 } catch(IOException e) {
                     System.out.println("not found");
                 }
             } else if("export".equals(com)) {
                 try {
-                    exportCards(cards, sc, log, counter);
+                    exportCards(cards, sc, log, counter, null);
                 } catch(IOException e) {
                     System.out.println("not found");
                 }
             } else if("ask".equals(com)) {
                 askCards(cards, sc, log, counter);
             } else if("exit".equals(com)) {
+                if("-export".equals(args[0])) {
+                    try {
+                        exportCards(cards, sc, log, counter, null);
+                    } catch(IOException e) {
+                        System.out.println("not found");
+                    }
+                }
                 System.out.println("Bye bye!");
                 break;
             } else if("log".equals(com)) {

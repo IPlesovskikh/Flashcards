@@ -200,9 +200,14 @@ public class Main {
         Mistakes counter = new Mistakes();
         Logging log = new Logging();
         String com = null;
-        if("-import".equals(args[0])) {
+        if(args.length != 0) {
             try {
-                importCards(cards, sc, log, counter, args[1]);
+                if("-import".equals(args[0])) {
+                    importCards(cards, sc, log, counter, args[1]);
+                } else if(args.length > 2 && "-import".equals(args[2])) {
+                    importCards(cards, sc, log, counter, args[3]);
+                }
+
             } catch(IOException e) {
                 System.out.println("not found");
             }
@@ -231,15 +236,21 @@ public class Main {
             } else if("ask".equals(com)) {
                 askCards(cards, sc, log, counter);
             } else if("exit".equals(com)) {
-                if("-export".equals(args[0])) {
+                if(args.length != 0) {
                     try {
-                        exportCards(cards, sc, log, counter, null);
+                        System.out.println("Bye bye!");
+                        if("-export".equals(args[0])) {
+                            exportCards(cards, sc, log, counter, args[1]);
+                        } else if(args.length > 2 && "-export".equals(args[2])){
+                            exportCards(cards, sc, log, counter, args[3]);
+                        }
                     } catch(IOException e) {
                         System.out.println("not found");
                     }
+                    break ;
                 }
                 System.out.println("Bye bye!");
-                break;
+                break ;
             } else if("log".equals(com)) {
                 try {
                     exportLog(log, sc);

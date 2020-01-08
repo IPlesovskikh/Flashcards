@@ -11,4 +11,4 @@ Features:
  - save logs; 
  - ask hardest cards(the most errors);
  - reset stats of errors>
-![screen](screen.?raw=true "Optional Title")
+![screen](screen.png?raw=true "Optional Title")

@@ -9,7 +9,7 @@ Features:
  - export cards to files;
  - ask random questions;
  - save logs; 
- - ask hardest cards(the most errors);
+ - show the hardest cards(the most errors);
  - reset stats of errors>
  
 ![screen](screen.png?raw=true "Optional Title")

@@ -26,7 +26,7 @@ public class Main {
             }
         }
         while (true) {
-            System.out.println("Input the action (add, remove, import, export, ask, exit, log, hardtest card, reset stats):");
+            System.out.println("Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):");
             log.saveData("Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):");
             com = sc.nextLine();
             log.saveData(com);
